@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="cs_floorplan.FloorplanCanvas">
+        <div class="o_floorplan_canvas">
+            <div class="o_floorplan_toolbar">
+                <button t-if="state.canEdit" class="btn btn-sm btn-secondary me-2" t-on-click="toggleEditMode">
+                    <t t-if="state.editMode">Terminar edición</t>
+                    <t t-else="">Editar plano</t>
+                </button>
+                <button t-if="state.editMode" class="btn btn-sm btn-primary" t-on-click="onNewRoom">
+                    + Habitación
+                </button>
+            </div>
+            <div class="o_floorplan_stage" t-ref="canvas">
+                <t t-foreach="state.rooms" t-as="room" t-key="room.id">
+                    <div t-attf-class="o_floorplan_room {{ roomColor(room) }} {{ state.editMode ? 'o_edit_mode' : '' }}"
+                         t-attf-style="left: {{room.pos_x}}px; top: {{room.pos_y}}px; width: {{room.width}}px; height: {{room.height}}px;"
+                         t-on-pointerdown="(ev) => this.onRoomPointerDown(ev, room)"
+                         t-on-dragover="onRoomDragOver"
+                         t-on-drop="(ev) => this.onRoomDrop(ev, room)">
+                        <div class="o_floorplan_room_header">
+                            <strong t-esc="room.name"/>
+                            <span class="o_floorplan_room_count" t-esc="room.ocupados + '/' + room.capacidad"/>
+                        </div>
+                        <div class="o_floorplan_room_body">
+                            <t t-foreach="room.residents" t-as="resident" t-key="resident.id">
+                                <span class="o_floorplan_resident_chip"
+                                      t-att-draggable="!state.editMode"
+                                      t-on-dragstart="(ev) => this.onResidentDragStart(ev, resident)"
+                                      t-esc="resident.name"/>
+                            </t>
+                        </div>
+                        <div t-if="state.editMode" class="o_floorplan_resize_handle"/>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>

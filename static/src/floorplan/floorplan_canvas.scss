@@ -1,0 +1,88 @@
+.o_floorplan_canvas {
+    .o_floorplan_toolbar {
+        margin-bottom: 8px;
+    }
+
+    .o_floorplan_stage {
+        position: relative;
+        min-height: 500px;
+        border: 1px dashed #ccc;
+        background-image:
+            repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(0, 0, 0, 0.05) 25px),
+            repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(0, 0, 0, 0.05) 25px);
+        overflow: auto;
+    }
+
+    .o_floorplan_room {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border: 2px solid #888;
+        border-radius: 4px;
+        padding: 4px 6px;
+        font-size: 12px;
+        color: #212529;
+        cursor: default;
+
+        &.o_edit_mode {
+            cursor: move;
+        }
+
+        &.room-free {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+
+        &.room-partial {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        &.room-full {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        &.room-maintenance {
+            background-color: #e2e3e5;
+            border-color: #6c757d;
+        }
+    }
+
+    .o_floorplan_room_header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2px;
+        font-size: 11px;
+    }
+
+    .o_floorplan_room_body {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        overflow-y: auto;
+    }
+
+    .o_floorplan_resident_chip {
+        border: 1px solid #999;
+        border-radius: 10px;
+        background-color: white;
+        padding: 0 6px;
+        font-size: 11px;
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: element;
+    }
+
+    .o_floorplan_resize_handle {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 10px;
+        height: 10px;
+        cursor: nwse-resize;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}

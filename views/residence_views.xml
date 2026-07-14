@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="residence_view_form_inherit_floorplan" model="ir.ui.view">
+            <field name="name">cs.residence.form.floorplan</field>
+            <field name="model">cs.residence</field>
+            <field name="inherit_id" ref="cs_resident.residence_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_title')]" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_floors"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-building-o"
+                            invisible="not id"
+                        >
+                            <field name="floor_count" widget="statinfo" string="Plantas"/>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

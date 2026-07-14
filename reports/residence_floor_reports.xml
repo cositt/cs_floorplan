@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_report_residence_floor" model="ir.actions.report">
+            <field name="name">Plano de Planta</field>
+            <field name="model">cs.residence.floor</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cs_floorplan.report_residence_floor_document</field>
+            <field name="report_file">cs_floorplan.report_residence_floor_document</field>
+            <field name="print_report_name">'Plano - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="model_cs_residence_floor"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_residence_floor_document">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="floor">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <h2>
+                                <span t-esc="floor.residence_id.name"/> — <span t-esc="floor.name"/>
+                            </h2>
+                            <div style="position: relative; width: 100%; min-height: 500px; border: 1px solid #999; margin-top: 12px;">
+                                <t t-foreach="floor.room_ids" t-as="room">
+                                    <div t-attf-style="position:absolute; left:#{room.pos_x}px; top:#{room.pos_y}px; width:#{room.width}px; height:#{room.height}px; border:1px solid #555; padding:2px; font-size:10px; overflow:hidden;">
+                                        <strong t-esc="room.name"/>
+                                        <div>
+                                            <t t-esc="room.ocupados"/>/<t t-esc="room.capacidad"/>
+                                        </div>
+                                        <t t-foreach="room.resident_ids.filtered(lambda r: r.state == 'activo')" t-as="resident">
+                                            <div t-esc="resident.name"/>
+                                        </t>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

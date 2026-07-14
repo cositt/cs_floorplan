@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="residence_floor_view_list" model="ir.ui.view">
+            <field name="name">cs.residence.floor.list</field>
+            <field name="model">cs.residence.floor</field>
+            <field name="arch" type="xml">
+                <list string="Plantas">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name" string="Planta"/>
+                    <field name="residence_id" string="Residencia"/>
+                    <field name="room_count" string="Habitaciones"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="residence_floor_view_form" model="ir.ui.view">
+            <field name="name">cs.residence.floor.form</field>
+            <field name="model">cs.residence.floor</field>
+            <field name="arch" type="xml">
+                <form string="Planta">
+                    <header>
+                        <button
+                            name="action_print_floorplan"
+                            type="object"
+                            string="Imprimir plano"
+                            class="btn-secondary"
+                            invisible="not id"
+                        />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Nombre de planta (ej. Planta 1)"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <field name="residence_id"/>
+                            <field name="sequence"/>
+                        </group>
+                        <notebook>
+                            <page string="Plano">
+                                <div class="alert alert-info" role="alert" invisible="id">
+                                    Guarde la planta para poder colocar habitaciones en el plano.
+                                </div>
+                                <widget name="floorplan_canvas" invisible="not id"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="residence_floor_action" model="ir.actions.act_window">
+            <field name="name">Plantas</field>
+            <field name="res_model">cs.residence.floor</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cree la primera planta de la residencia
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>
