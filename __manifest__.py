@@ -11,6 +11,7 @@
         'security/ir.model.access.csv',
         'views/residence_floor_views.xml',
         'views/residence_views.xml',
+        'views/room_views.xml',
         'reports/residence_floor_reports.xml',
     ],
     'assets': {

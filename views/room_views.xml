@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Conecta cs.room (creada desde Centro de Salud) con su planta del plano.
+             Sin esto la habitación nunca aparece en el canvas: floorplan_canvas.js
+             filtra por floor_id y ese campo no existía en room_view_form. -->
+        <record id="room_view_form_inherit_floorplan" model="ir.ui.view">
+            <field name="name">cs.room.form.floorplan</field>
+            <field name="model">cs.room</field>
+            <field name="inherit_id" ref="cs_resident.room_view_form"/>
+            <field name="arch" type="xml">
+                <field name="planta" position="after">
+                    <field name="floor_id"
+                           string="Planta (Plano)"
+                           domain="[('residence_id', '=', residence_id)]"
+                           options="{'no_create': True}"
+                           readonly="1"
+                           groups="!cs_floorplan.group_cs_floorplan_manager"/>
+                    <field name="floor_id"
+                           string="Planta (Plano)"
+                           domain="[('residence_id', '=', residence_id)]"
+                           options="{'no_create': True}"
+                           groups="cs_floorplan.group_cs_floorplan_manager"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="room_view_list_inherit_floorplan" model="ir.ui.view">
+            <field name="name">cs.room.list.floorplan</field>
+            <field name="model">cs.room</field>
+            <field name="inherit_id" ref="cs_resident.room_view_list"/>
+            <field name="arch" type="xml">
+                <field name="planta" position="after">
+                    <field name="floor_id" string="Planta (Plano)" optional="show"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- La ficha de Residencia tiene su propia lista de habitaciones embebida
+             (arch hardcodeado dentro de room_ids, no reutiliza room_view_list) —
+             es la pantalla que se usa en el día a día, así que necesita el campo también. -->
+        <record id="residence_view_form_inherit_floorplan_rooms" model="ir.ui.view">
+            <field name="name">cs.residence.form.floorplan.rooms</field>
+            <field name="model">cs.residence</field>
+            <field name="inherit_id" ref="cs_resident.residence_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='room_ids']/list/field[@name='planta']" position="after">
+                    <field name="floor_id"
+                           string="Planta (Plano)"
+                           domain="[('residence_id', '=', residence_id)]"
+                           options="{'no_create': True}"
+                           readonly="1"
+                           groups="!cs_floorplan.group_cs_floorplan_manager"/>
+                    <field name="floor_id"
+                           string="Planta (Plano)"
+                           domain="[('residence_id', '=', residence_id)]"
+                           options="{'no_create': True}"
+                           groups="cs_floorplan.group_cs_floorplan_manager"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
