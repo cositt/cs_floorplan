@@ -18,6 +18,17 @@
                         >
                             <field name="floor_count" widget="statinfo" string="Plantas"/>
                         </button>
+                        <button
+                            name="action_view_floorplan_overview"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-th-large"
+                            invisible="not id or floor_count == 0"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Plano General</span>
+                            </div>
+                        </button>
                     </div>
                 </xpath>
             </field>

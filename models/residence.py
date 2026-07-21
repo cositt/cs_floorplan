@@ -22,3 +22,12 @@ class Residence(models.Model):
             'domain': [('residence_id', '=', self.id)],
             'context': {'default_residence_id': self.id},
         }
+
+    def action_view_floorplan_overview(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'cs_floorplan_overview',
+            'name': _('Plano General'),
+            'params': {'residence_id': self.id},
+        }

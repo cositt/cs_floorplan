@@ -1,6 +1,6 @@
 {
     'name': 'Centro Sanitario - Plano de Residencia',
-    'version': '1.0.0',
+    'version': '1.0.1',
     'category': 'Healthcare',
     'author': 'Equilibrium',
     'license': 'LGPL-3',
@@ -19,6 +19,9 @@
             'cs_floorplan/static/src/floorplan/floorplan_canvas.js',
             'cs_floorplan/static/src/floorplan/floorplan_canvas.xml',
             'cs_floorplan/static/src/floorplan/floorplan_canvas.scss',
+            'cs_floorplan/static/src/floorplan/floorplan_overview.js',
+            'cs_floorplan/static/src/floorplan/floorplan_overview.xml',
+            'cs_floorplan/static/src/floorplan/floorplan_overview.scss',
         ],
     },
     'installable': True,

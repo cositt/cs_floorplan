@@ -1,0 +1,20 @@
+.o_floorplan_overview {
+    padding: 8px 16px;
+    overflow: auto;
+
+    .o_floorplan_overview_floor {
+        margin-bottom: 24px;
+    }
+
+    .o_floorplan_overview_floor_title {
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .o_floorplan_resident_chip {
+        cursor: pointer;
+    }
+}

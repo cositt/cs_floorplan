@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="cs_floorplan.FloorplanOverview">
+        <div class="o_floorplan_overview">
+            <div t-if="!state.floors.length" class="alert alert-info m-3">
+                Esta residencia todavía no tiene plantas configuradas.
+            </div>
+            <t t-foreach="state.floors" t-as="floor" t-key="floor.id">
+                <div class="o_floorplan_overview_floor">
+                    <h4 class="o_floorplan_overview_floor_title" t-on-click="() => this.onFloorClick(floor)">
+                        <t t-esc="floor.name"/>
+                    </h4>
+                    <div class="o_floorplan_canvas">
+                        <div class="o_floorplan_stage">
+                            <t t-foreach="floor.rooms" t-as="room" t-key="room.id">
+                                <div t-attf-class="o_floorplan_room {{ roomColor(room) }}"
+                                     t-attf-style="left: {{room.pos_x}}px; top: {{room.pos_y}}px; width: {{room.width}}px; height: {{room.height}}px;">
+                                    <div class="o_floorplan_room_header">
+                                        <strong t-esc="room.name"/>
+                                        <span class="o_floorplan_room_count" t-esc="room.ocupados + '/' + room.capacidad"/>
+                                    </div>
+                                    <div class="o_floorplan_room_body">
+                                        <t t-foreach="room.residents" t-as="resident" t-key="resident.id">
+                                            <span class="o_floorplan_resident_chip"
+                                                  t-on-click="(ev) => this.onResidentClick(ev, resident)"
+                                                  t-esc="resident.name"/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

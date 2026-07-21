@@ -140,6 +140,21 @@ export class FloorplanCanvas extends Component {
         ev.dataTransfer.effectAllowed = "move";
     }
 
+    onResidentClick(ev, resident) {
+        if (this.state.editMode) {
+            return;
+        }
+        ev.stopPropagation();
+        this.action.doAction({
+            type: "ir.actions.act_window",
+            res_model: "cs.resident",
+            res_id: resident.id,
+            view_mode: "form",
+            views: [[false, "form"]],
+            target: "current",
+        });
+    }
+
     onRoomDragOver(ev) {
         if (ev.dataTransfer.types.includes("text/resident-id")) {
             ev.preventDefault();

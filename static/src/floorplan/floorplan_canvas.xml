@@ -27,6 +27,7 @@
                                 <span class="o_floorplan_resident_chip"
                                       t-att-draggable="!state.editMode"
                                       t-on-dragstart="(ev) => this.onResidentDragStart(ev, resident)"
+                                      t-on-click="(ev) => this.onResidentClick(ev, resident)"
                                       t-esc="resident.name"/>
                             </t>
                         </div>
